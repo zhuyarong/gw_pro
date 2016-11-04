@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.ZTE_DATAMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.ZTE_DATA" >
+    <result column="data" property="data" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jl.mybean.ZTE_DATA" >
+    insert into zte_data (data)
+    values (#{data,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.ZTE_DATA" >
+    insert into zte_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="data != null" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

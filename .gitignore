@@ -1,0 +1,11 @@
+target/
+lib/
+logs/
+.idea/
+.settings/
+
+*.class
+xmserver.iml
+.project
+.classpath
+.DS_Store

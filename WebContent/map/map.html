@@ -1,0 +1,241 @@
+
+<html>  
+<head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+   <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>  -->
+   <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=CKyf1xczhm18Xt9P6wQnQ7S4sn1VDITf">
+		<script type="text/javascript" src="map\BMapLib\GeoUtils.js"></script>  
+	 <script type="text/javascript" src="map\BMapLib\DrawingManager.js"></script>  
+	  <script type="text/javascript" src="map\tools.js"></script>  
+    <title>百度地图</title>  
+</head>  
+<body style="overflow: scroll">  
+		<div id="BUTTON" style="height: 10%"><span>建立电子围栏</span>
+		<input type="button" value="标记" onclick="drawOverlays3()"/>
+		<input type="button" value="圆形" onclick="drawOverlays1()"/>
+		<input type="button" value="线" onclick="drawOverlays2()"/>
+		<input type="button" value="多边形" onclick="drawOverlays()"/>
+		
+		<input type="button" value="建立完成" onclick="finishDraw()"/>
+		<input type="button" value="清除" onclick="clearOverlays()"/>
+		<span>&nbsp;&nbsp;&nbsp;位置：</span><span id="drawPointX">X</span>,<span id="drawPointY">Y</span>
+		<span>&nbsp;&nbsp;&nbsp;节点信息：</span><span id="drawPointes">X,Y;X1,Y1;</span>
+		</div>  
+        <div id="allmap" style="height: 90%"></div>  
+</body>  
+</html>  
+
+		
+		<script type="text/javascript">  
+			var map = new BMap.Map("allmap");               
+			var point = new BMap.Point(108.92638599346664, 34.209765369701);     
+			map.centerAndZoom(point, 15);                        
+			map.enableScrollWheelZoom();  
+			var myDrawingManagerObject;
+			var myDrawingManagerObject1;
+			var myDrawingManagerObject2;
+			var myDrawingManagerObject3;
+				//alert(myDrawingManagerObject.getDrawingMode());
+
+			
+			function clearOverlays(){
+				map.clearOverlays();  
+				document.getElementById("drawPointes").innerHTML="";
+			}
+			function drawOverlays(){
+				myDrawingManagerObject = new BMapLib.DrawingManager(map, {isOpen: true, 
+				drawingType:BMAP_DRAWING_CIRCLE, 
+				drawingMode:BMAP_DRAWING_POLYGON,
+				enableDrawingTool: true,
+				enableCalculate: false,
+				drawingToolOptions: {
+					anchor: BMAP_ANCHOR_TOP_LEFT,
+					offset: new BMap.Size(5, 5),
+					drawingTypes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ],
+					drawingModes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ]
+				},
+				polylineOptions: {
+					strokeColor: "#333"
+				}});
+				myDrawingManagerObject.open();
+			}
+			function drawOverlays1(){
+				myDrawingManagerObject1 = new BMapLib.DrawingManager(map, {isOpen: true, 
+				drawingType:BMAP_DRAWING_CIRCLE, 
+				drawingMode:BMAP_DRAWING_CIRCLE,
+				enableDrawingTool: true,
+				enableCalculate: false,
+				drawingToolOptions: {
+					anchor: BMAP_ANCHOR_TOP_LEFT,
+					offset: new BMap.Size(5, 5),
+					drawingTypes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ],
+					drawingModes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ]
+				},
+				polylineOptions: {
+					strokeColor: "#333"
+				}});
+				myDrawingManagerObject.open();
+			}
+			function drawOverlays2(){
+				myDrawingManagerObject2 = new BMapLib.DrawingManager(map, {isOpen: true, 
+				drawingType:BMAP_DRAWING_CIRCLE, 
+				drawingMode:BMAP_DRAWING_POLYLINE,
+				enableDrawingTool: true,
+				enableCalculate: false,
+				drawingToolOptions: {
+					anchor: BMAP_ANCHOR_TOP_LEFT,
+					offset: new BMap.Size(5, 5),
+					drawingTypes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ],
+					drawingModes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ]
+				},
+				polylineOptions: {
+					strokeColor: "#333"
+				}});
+				myDrawingManagerObject.open();
+			}
+			
+			function drawOverlays3(){
+				myDrawingManagerObject3 = new BMapLib.DrawingManager(map, {isOpen: true, 
+				drawingType:BMAP_DRAWING_CIRCLE, 
+				drawingMode:BMAP_DRAWING_MARKER,
+				enableDrawingTool: true,
+				enableCalculate: false,
+				drawingToolOptions: {
+					anchor: BMAP_ANCHOR_TOP_LEFT,
+					offset: new BMap.Size(5, 5),
+					drawingTypes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ],
+					drawingModes : [
+						
+						BMAP_DRAWING_CIRCLE,
+						BMAP_DRAWING_MARKER,
+						BMAP_DRAWING_POLYLINE,
+						BMAP_DRAWING_POLYGON,
+						BMAP_DRAWING_RECTANGLE 
+					 ]
+				},
+				polylineOptions: {
+					strokeColor: "#333"
+				}});
+				myDrawingManagerObject.open();
+			}
+			function finishDraw(){
+				if(null!=myDrawingManagerObject){
+					myDrawingManagerObject.close();
+				}
+				if(null!=myDrawingManagerObject1){
+					myDrawingManagerObject.close();
+				}
+				if(null!=myDrawingManagerObject2){
+					myDrawingManagerObject.close();
+				}
+				if(null!=myDrawingManagerObject3){
+					myDrawingManagerObject.close();
+				}
+				 
+			}
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+	/*缩放控件type有四种类型:
+	BMAP_NAVIGATION_CONTROL_SMALL：仅包含平移和缩放按钮；BMAP_NAVIGATION_CONTROL_PAN:仅包含平移按钮；BMAP_NAVIGATION_CONTROL_ZOOM：仅包含缩放按钮*/
+//添加控件和比例尺
+	map.addControl(top_left_control);        
+		map.addControl(top_left_navigation);     
+		map.addControl(top_right_navigation); 
+	
+	//添加控件和比例尺
+	function add_control(){
+		map.addControl(top_left_control);        
+		map.addControl(top_left_navigation);     
+		map.addControl(top_right_navigation);    
+	}
+	//移除控件和比例尺
+	function delete_control(){
+		map.removeControl(top_left_control);     
+		map.removeControl(top_left_navigation);  
+		map.removeControl(top_right_navigation); 
+	}	
+
+
+	var mapType1 = new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_SATELLITE_MAP,BMAP_HYBRID_MAP],offset: new BMap.Size(80, 0)});
+	//var mapType2 = new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_LEFT,offset: new BMap.Size(80, 0)});
+	/**
+	BMAP_NORMAL_MAP:2D图
+	BMAP_HYBRID_MAP:混合图
+	BMAP_SATELLITE_MAP：卫星图
+	BMAP_PERSPECTIVE_MAP：三维图
+	**/
+	var overView = new BMap.OverviewMapControl();
+	var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT});
+	//添加地图类型和缩略图	
+	map.addControl(mapType1);          //2D图，卫星图
+		//map.addControl(mapType2);          //左上角，默认地图控件
+		
+		map.setCurrentCity("西安");        //由于有3D图，需要设置城市哦
+		map.addControl(overView);          //添加默认缩略地图控件
+		map.addControl(overViewOpen);      //右下角，打开
+	//添加地图类型和缩略图
+	function add_control1(){
+		map.addControl(mapType1);          //2D图，卫星图
+		map.addControl(mapType2);          //左上角，默认地图控件
+		map.setCurrentCity("北京");        //由于有3D图，需要设置城市哦
+		map.addControl(overView);          //添加默认缩略地图控件
+		map.addControl(overViewOpen);      //右下角，打开
+	}
+	//移除地图类型和缩略图
+	function delete_control1(){
+		map.removeControl(mapType1);   //移除2D图，卫星图
+		map.removeControl(mapType2);
+		map.removeControl(overView);
+		map.removeControl(overViewOpen);
+	}	
+		</script>  

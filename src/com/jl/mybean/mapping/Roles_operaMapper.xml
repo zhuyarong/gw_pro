@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.Roles_operaMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.Roles_opera" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roles_id" property="rolesId" jdbcType="INTEGER" />
+    <result column="opera_id" property="operaId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roles_id, opera_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from roles_opera
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from roles_opera
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jl.mybean.Roles_opera" useGeneratedKeys="true" keyProperty="id" >
+    insert into roles_opera (roles_id, opera_id)
+    values (#{rolesId,jdbcType=INTEGER}, #{operaId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.Roles_opera" useGeneratedKeys="true" keyProperty="id" >
+    insert into roles_opera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolesId != null" >
+        roles_id,
+      </if>
+      <if test="operaId != null" >
+        opera_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolesId != null" >
+        #{rolesId,jdbcType=INTEGER},
+      </if>
+      <if test="operaId != null" >
+        #{operaId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jl.mybean.Roles_opera" >
+    update roles_opera
+    <set >
+      <if test="rolesId != null" >
+        roles_id = #{rolesId,jdbcType=INTEGER},
+      </if>
+      <if test="operaId != null" >
+        opera_id = #{operaId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jl.mybean.Roles_opera" >
+    update roles_opera
+    set roles_id = #{rolesId,jdbcType=INTEGER},
+      opera_id = #{operaId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

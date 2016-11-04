@@ -1,0 +1,2 @@
+http://api.map.baidu.com/library/GeoUtils/1.2/docs/symbols/BMapLib.GeoUtils.html
+http://api.map.baidu.com/library/DrawingManager/1.4/docs/symbols/BMapLib.html

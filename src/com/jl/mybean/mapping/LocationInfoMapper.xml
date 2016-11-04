@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.LocationInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.LocationInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="equ_num" property="equNum" jdbcType="VARCHAR" />
+    <result column="equ_type" property="equType" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="NUMERIC" />
+    <result column="lng" property="lng" jdbcType="NUMERIC" />
+    <result column="hight" property="hight" jdbcType="NUMERIC" />
+    <result column="active" property="active" jdbcType="INTEGER" />
+    <result column="electricity" property="electricity" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, equ_num, equ_type, lat, lng, hight, active, electricity, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from locationinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from locationinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jl.mybean.LocationInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into locationinfo (equ_num, equ_type, lat, 
+      lng, hight, active, 
+      electricity, create_time)
+    values (#{equNum,jdbcType=VARCHAR}, #{equType,jdbcType=VARCHAR}, #{lat,jdbcType=NUMERIC}, 
+      #{lng,jdbcType=NUMERIC}, #{hight,jdbcType=NUMERIC}, #{active,jdbcType=INTEGER}, 
+      #{electricity,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.LocationInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into locationinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="equNum != null" >
+        equ_num,
+      </if>
+      <if test="equType != null" >
+        equ_type,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="hight != null" >
+        hight,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+      <if test="electricity != null" >
+        electricity,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="equNum != null" >
+        #{equNum,jdbcType=VARCHAR},
+      </if>
+      <if test="equType != null" >
+        #{equType,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=NUMERIC},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=NUMERIC},
+      </if>
+      <if test="hight != null" >
+        #{hight,jdbcType=NUMERIC},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=INTEGER},
+      </if>
+      <if test="electricity != null" >
+        #{electricity,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jl.mybean.LocationInfo" >
+    update locationinfo
+    <set >
+      <if test="equNum != null" >
+        equ_num = #{equNum,jdbcType=VARCHAR},
+      </if>
+      <if test="equType != null" >
+        equ_type = #{equType,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=NUMERIC},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=NUMERIC},
+      </if>
+      <if test="hight != null" >
+        hight = #{hight,jdbcType=NUMERIC},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=INTEGER},
+      </if>
+      <if test="electricity != null" >
+        electricity = #{electricity,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jl.mybean.LocationInfo" >
+    update locationinfo
+    set equ_num = #{equNum,jdbcType=VARCHAR},
+      equ_type = #{equType,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=NUMERIC},
+      lng = #{lng,jdbcType=NUMERIC},
+      hight = #{hight,jdbcType=NUMERIC},
+      active = #{active,jdbcType=INTEGER},
+      electricity = #{electricity,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

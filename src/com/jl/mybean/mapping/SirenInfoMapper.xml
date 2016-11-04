@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.SirenInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.SirenInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="equfence_id" property="equfenceId" jdbcType="INTEGER" />
+    <result column="sendtimestamp" property="sendtimestamp" jdbcType="TIMESTAMP" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, users_id, equfence_id, sendtimestamp, message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sireninfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sireninfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jl.mybean.SirenInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into sireninfo (users_id, equfence_id, sendtimestamp, 
+      message)
+    values (#{usersId,jdbcType=INTEGER}, #{equfenceId,jdbcType=INTEGER}, #{sendtimestamp,jdbcType=TIMESTAMP}, 
+      #{message,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.SirenInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into sireninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usersId != null" >
+        users_id,
+      </if>
+      <if test="equfenceId != null" >
+        equfence_id,
+      </if>
+      <if test="sendtimestamp != null" >
+        sendtimestamp,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usersId != null" >
+        #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="equfenceId != null" >
+        #{equfenceId,jdbcType=INTEGER},
+      </if>
+      <if test="sendtimestamp != null" >
+        #{sendtimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jl.mybean.SirenInfo" >
+    update sireninfo
+    <set >
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="equfenceId != null" >
+        equfence_id = #{equfenceId,jdbcType=INTEGER},
+      </if>
+      <if test="sendtimestamp != null" >
+        sendtimestamp = #{sendtimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jl.mybean.SirenInfo" >
+    update sireninfo
+    set users_id = #{usersId,jdbcType=INTEGER},
+      equfence_id = #{equfenceId,jdbcType=INTEGER},
+      sendtimestamp = #{sendtimestamp,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

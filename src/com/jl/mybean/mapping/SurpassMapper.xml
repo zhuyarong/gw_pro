@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.SurpassMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.Surpass" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="equinfo_id" property="equinfoId" jdbcType="INTEGER" />
+    <result column="equfence_id" property="equfenceId" jdbcType="INTEGER" />
+    <result column="concentrator_id" property="concentratorId" jdbcType="INTEGER" />
+    <result column="equ_num" property="equNum" jdbcType="VARCHAR" />
+    <result column="pass_timestamp" property="passTimestamp" jdbcType="TIMESTAMP" />
+    <result column="currlat" property="currlat" jdbcType="NUMERIC" />
+    <result column="currlng" property="currlng" jdbcType="NUMERIC" />
+    <result column="is_send" property="isSend" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, users_id, equinfo_id, equfence_id, concentrator_id, equ_num, pass_timestamp, 
+    currlat, currlng, is_send
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from surpass
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectEqunumByissend" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+     select equ_num from surpass a 
+      where is_send= #{is_send,jdbcType=INTEGER}
+      group by equ_num
+  </select>
+    <select id="selectEqunum" resultMap="BaseResultMap"  >
+     select equ_num from surpass a 
+      group by equ_num
+  </select>
+  <select id="selectByEqunum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select 
+	 <include refid="Base_Column_List" />
+	from surpass where equ_num=#{equ_num,jdbcType=VARCHAR}
+	and pass_timestamp = 
+	(select max(pass_timestamp) from surpass  where equ_num=#{equ_num,jdbcType=VARCHAR})
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from surpass
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jl.mybean.Surpass" useGeneratedKeys="true" keyProperty="id" >
+    insert into surpass (users_id, equinfo_id, equfence_id, 
+      concentrator_id, equ_num, pass_timestamp, 
+      currlat, currlng, is_send
+      )
+    values (#{usersId,jdbcType=INTEGER}, #{equinfoId,jdbcType=INTEGER}, #{equfenceId,jdbcType=INTEGER}, 
+      #{concentratorId,jdbcType=INTEGER}, #{equNum,jdbcType=VARCHAR}, #{passTimestamp,jdbcType=TIMESTAMP}, 
+      #{currlat,jdbcType=NUMERIC}, #{currlng,jdbcType=NUMERIC}, #{isSend,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.Surpass" useGeneratedKeys="true" keyProperty="id" >
+    insert into surpass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usersId != null" >
+        users_id,
+      </if>
+      <if test="equinfoId != null" >
+        equinfo_id,
+      </if>
+      <if test="equfenceId != null" >
+        equfence_id,
+      </if>
+      <if test="concentratorId != null" >
+        concentrator_id,
+      </if>
+      <if test="equNum != null" >
+        equ_num,
+      </if>
+      <if test="passTimestamp != null" >
+        pass_timestamp,
+      </if>
+      <if test="currlat != null" >
+        currlat,
+      </if>
+      <if test="currlng != null" >
+        currlng,
+      </if>
+      <if test="isSend != null" >
+        is_send,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usersId != null" >
+        #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="equinfoId != null" >
+        #{equinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="equfenceId != null" >
+        #{equfenceId,jdbcType=INTEGER},
+      </if>
+      <if test="concentratorId != null" >
+        #{concentratorId,jdbcType=INTEGER},
+      </if>
+      <if test="equNum != null" >
+        #{equNum,jdbcType=VARCHAR},
+      </if>
+      <if test="passTimestamp != null" >
+        #{passTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currlat != null" >
+        #{currlat,jdbcType=NUMERIC},
+      </if>
+      <if test="currlng != null" >
+        #{currlng,jdbcType=NUMERIC},
+      </if>
+      <if test="isSend != null" >
+        #{isSend,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jl.mybean.Surpass" >
+    update surpass
+    <set >
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="equinfoId != null" >
+        equinfo_id = #{equinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="equfenceId != null" >
+        equfence_id = #{equfenceId,jdbcType=INTEGER},
+      </if>
+      <if test="concentratorId != null" >
+        concentrator_id = #{concentratorId,jdbcType=INTEGER},
+      </if>
+      <if test="equNum != null" >
+        equ_num = #{equNum,jdbcType=VARCHAR},
+      </if>
+      <if test="passTimestamp != null" >
+        pass_timestamp = #{passTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currlat != null" >
+        currlat = #{currlat,jdbcType=NUMERIC},
+      </if>
+      <if test="currlng != null" >
+        currlng = #{currlng,jdbcType=NUMERIC},
+      </if>
+      <if test="isSend != null" >
+        is_send = #{isSend,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jl.mybean.Surpass" >
+    update surpass
+    set users_id = #{usersId,jdbcType=INTEGER},
+      equinfo_id = #{equinfoId,jdbcType=INTEGER},
+      equfence_id = #{equfenceId,jdbcType=INTEGER},
+      concentrator_id = #{concentratorId,jdbcType=INTEGER},
+      equ_num = #{equNum,jdbcType=VARCHAR},
+      pass_timestamp = #{passTimestamp,jdbcType=TIMESTAMP},
+      currlat = #{currlat,jdbcType=NUMERIC},
+      currlng = #{currlng,jdbcType=NUMERIC},
+      is_send = #{isSend,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateSurpasses" parameterType="com.jl.mybean.Surpass" >
+    update surpass
+    set 
+      is_send = #{is_send,jdbcType=INTEGER}
+    where id in  
+     <foreach item="item" index="index" collection="list" 
+                         open="(" separator="," close=")">
+                        #{item}
+     </foreach>
+  </update>
+  
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mybean.mydao.ConcentratorMapper" >
+  <resultMap id="BaseResultMap" type="com.jl.mybean.Concentrator" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="efence_id" property="efenceId" jdbcType="INTEGER" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, key, users_id, efence_id, mac
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from concentrator
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+    <select id="selectByMac" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from concentrator
+    where mac = #{mac,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from concentrator
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jl.mybean.Concentrator" useGeneratedKeys="true" keyProperty="id" >
+    insert into concentrator (key, users_id, efence_id, 
+      mac)
+    values (#{key,jdbcType=VARCHAR}, #{usersId,jdbcType=INTEGER}, #{efenceId,jdbcType=INTEGER}, 
+      #{mac,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jl.mybean.Concentrator" useGeneratedKeys="true" keyProperty="id" >
+    insert into concentrator
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="usersId != null" >
+        users_id,
+      </if>
+      <if test="efenceId != null" >
+        efence_id,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="efenceId != null" >
+        #{efenceId,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByMac" parameterType="com.jl.mybean.Concentrator" >
+    update concentrator
+    <set >
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="efenceId != null" >
+        efence_id = #{efenceId,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jl.mybean.Concentrator" >
+    update concentrator
+    <set >
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=INTEGER},
+      </if>
+      <if test="efenceId != null" >
+        efence_id = #{efenceId,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jl.mybean.Concentrator" >
+    update concentrator
+    set key = #{key,jdbcType=VARCHAR},
+      users_id = #{usersId,jdbcType=INTEGER},
+      efence_id = #{efenceId,jdbcType=INTEGER},
+      mac = #{mac,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
